@@ -1,0 +1,28 @@
+{
+  "name": "control_inventarios_mandde",
+  "version": "0.0.1",
+  "description": "Backend para el aplicativo de control de inventarios de Mandde",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NIHIKO/control_inventarios_mandde_back.git"
+  },
+  "author": "Social System Colombia",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/NIHIKO/control_inventarios_mandde_back/issues"
+  },
+  "homepage": "https://github.com/NIHIKO/control_inventarios_mandde_back#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.1"
+  }
+}
