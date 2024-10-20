@@ -1,4 +1,5 @@
 import express from "express";
+const cors = require('cors');
 import loginRouter from "./routes/login";
 import * as middlewares from './middlewares/token.middleware';
 
@@ -7,10 +8,10 @@ const mssql = require("mssql");
 const config_bd = require("./config/db");
 const puerto = process.env.API_PUERTO || 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use("/api/", loginRouter);
-
 app.get("/prueba", middlewares.verificarToken,(_req, res) => {
   console.log("Se ingresó a prueba");
 

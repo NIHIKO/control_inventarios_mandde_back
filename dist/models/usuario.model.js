@@ -31,55 +31,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors = require('cors');
-const login_1 = __importDefault(require("./routes/login"));
-const middlewares = __importStar(require("./middlewares/token.middleware"));
-const app = (0, express_1.default)();
-const mssql = require("mssql");
-const config_bd = require("./config/db");
-const puerto = process.env.API_PUERTO || 3000;
-app.use(cors());
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: false }));
-app.use("/api/", login_1.default);
-app.get("/prueba", middlewares.verificarToken, (_req, res) => {
-    console.log("Se ingresó a prueba");
-    (() => __awaiter(void 0, void 0, void 0, function* () {
+exports.logueaUsuario = logueaUsuario;
+const bdService = __importStar(require("../services/db.service"));
+function logueaUsuario(usuario, clave) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const query = `
+        DECLARE @vOpcion VARCHAR(80) = 'Verifica_Menu_Usuario_Interno',
+                @vTxtBuscar VARCHAR(120) = '',
+                @vUsuario VARCHAR(20) = '` + usuario + `',
+                @vClave VARCHAR(50) = '` + clave + `',
+                @result INT;
+
+        EXEC @result = dbo.LogueaUsuarios 'Verifica_Menu_Usuario_Interno', '', @vUsuario, @vClave;
+        SELECT @result AS result;
+    `;
         try {
-            yield mssql.connect(config_bd);
-            const result = yield mssql.query(`EXEC UsuarioSGA1
-            @vOpcion='Lista Usuarios',
-            @vNumDocumento='830025582',
-            @vNumDocumentoA="0", --Documento anterior
-            @vNomUsuario="0",
-            @vDirUsuario="0",
-            @vTelUsuario="0",
-            @vCodCiudad=0,
-            @vUsuario="0",
-            @vUsuarioA="0",
-            @vClave="0",
-            @vUsrProcesa="0",
-            @vUsrCaptura="0",
-            @vUsrModifica="0",
-            @vCodPerfil="0",
-            @vMcaActivo="0",
-            @vCodProyecto="0",
-            @vIdUsuario=0;`);
-            console.log(result);
-            res.status(200).send(result.recordset);
+            const res = yield bdService.ejecutarConsulta(query);
+            return res.recordset;
         }
-        catch (err) {
-            // ... error checks
-            console.log(err);
-            res.status(500).send(err);
+        catch (error) {
+            console.error('Error ejecutando el procedimiento almacenado:', error);
+            throw error;
         }
-    }))();
-});
-app.listen(puerto, () => {
-    console.log(`Servidor iniciado el el puerto ${puerto}`);
-});
+    });
+}
