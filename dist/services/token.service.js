@@ -7,7 +7,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 function generarToken(usuario) {
     console.log(usuario);
-    return jwt.sign(usuario, 'ppmManddeSecret216!!..', { expiresIn: '60m' });
+    return jwt.sign(usuario, 'ppmManddeSecret216!!..', { expiresIn: '60m' }); //TODO: .env include secret
 }
 function validarToken(token) {
     return jwt.verify(token, 'ppmManddeSecret216!!..', (error, usuario) => {
@@ -16,7 +16,7 @@ function validarToken(token) {
 }
 function renovarToken(token) {
     try {
-        const usuario = jwt.verify(token, 'ppmManddeSecret216!!..');
+        const usuario = jwt.verify(token, 'ppmManddeSecret216!!..'); //TODO: .env include secret
         delete usuario.iat;
         delete usuario.exp;
         return generarToken(usuario);

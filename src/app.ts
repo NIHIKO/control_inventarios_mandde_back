@@ -7,8 +7,21 @@ const app = express();
 const mssql = require("mssql");
 const config_bd = require("./config/db");
 const puerto = process.env.API_PUERTO || 3000;
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,OPTIONS,POST,PUT',
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  exposedHeaders: 'Authorization'
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Expose-Headers", "Authorization");
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use("/api/", loginRouter);
