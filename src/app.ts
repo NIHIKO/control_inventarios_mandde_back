@@ -3,6 +3,7 @@ import loginRouter from "./routes/login";
 import * as middlewares from './middlewares/token.middleware';
 
 const app = express();
+const session = require('express-session');
 const mssql = require("mssql");
 const config_bd = require("./config/db");
 const puerto = process.env.API_PUERTO || 3000;

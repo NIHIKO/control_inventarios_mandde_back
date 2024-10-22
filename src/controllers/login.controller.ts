@@ -8,14 +8,20 @@ export async function iniciarSesion(req: Request, res: Response){
     let respuesta = await usuarioModel.buscarUsuario(usuario, clave);
     if(respuesta){
         const token = tokenService.generarToken(respuesta);
-        res.status(200)
+        res
+            .status(200)
+            .header({"token": token})
             .send({
                     "codigo": "1",
                     "mensaje": "usuario encontrado",
-                    "token": token,
                     "data": respuesta
                 });
     } else{
-        res.status(404).send({"codigo": "-1","mensaje":"usuario no encontrado"});
+        res
+            .status(401)
+            .send({
+                    "codigo": "-1",
+                    "mensaje":"usuario no encontrado"
+                });
     }
 }
