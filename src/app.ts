@@ -26,9 +26,11 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use("/api/", loginRouter);
-app.get("/prueba", middlewares.verificarToken,(_req, res) => {
-  console.log("Se ingresó a prueba");
 
+
+
+
+app.get("/prueba", middlewares.verificarToken,(_req, res) => {
   (async () => {
     try {
       await mssql.connect(config_bd);

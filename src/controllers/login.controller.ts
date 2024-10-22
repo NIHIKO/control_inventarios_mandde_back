@@ -5,9 +5,7 @@ const usuarioModel = require('../models/usuario.model');
 
 export async function iniciarSesion(req: Request, res: Response) {
     const { usuario, clave } = req.body;
-    console.log(req.body)
     let respuesta = await usuarioModel.logueaUsuario(usuario, clave);
-    console.log("respuesta es => ", respuesta)
     if (respuesta[0].Mensaje) {
         res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
     } else {
