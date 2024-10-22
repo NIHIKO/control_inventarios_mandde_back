@@ -1,24 +1,22 @@
 import * as bdService from '../services/db.service';
 
-export interface UsuarioModel {
-    Id_Usuario: number;
-    Nom_Usuario: string;
-    Num_Documento: number;
-    Dir_Usuario: string;
-    Tel_Usuario: number;
-    Usuario: string;
-    Clave: string;
-    Cod_Ciudad: string;
-    Fec_Procesa: Date;
-    Usr_Procesa: number;
-    Mca_Activo: boolean;
-    Cod_Proyecto: number;
-}
+export async function logueaUsuario(usuario: string, clave: string) {
+    const query = `
+        DECLARE @vOpcion VARCHAR(80) = 'Verifica_Menu_Usuario_Interno',
+                @vTxtBuscar VARCHAR(120) = '',
+                @vUsuario VARCHAR(20) = '` + usuario + `',
+                @vClave VARCHAR(50) = '` + clave + `',
+                @result INT;
 
-export async function buscarUsuario(usuario: string, clave: string){
-    const query = "SELECT Id_Usuario, Nom_Usuario, Num_Documento, Dir_Usuario, " +
-                    "Tel_Usuario, Usuario, Clave, Cod_Ciudad, Fec_Procesa, Usr_Procesa, " +
-                    "Mca_Activo, Cod_Proyecto FROM SGA00001 WHERE Usuario = '" + usuario + "' AND Clave = '" + clave + "'";
-    const res = await bdService.ejecutarConsulta(query);
-    return res.recordset[0];
+        EXEC @result = dbo.LogueaUsuarios 'Verifica_Menu_Usuario_Interno', '', @vUsuario, @vClave;
+        SELECT @result AS result;
+    `;
+
+    try {
+        const res = await bdService.ejecutarConsulta(query);
+        return res.recordset;
+    } catch (error) {
+        console.error('Error ejecutando el procedimiento almacenado:', error);
+        throw error;
+    }
 }
