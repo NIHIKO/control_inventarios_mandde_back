@@ -6,17 +6,16 @@ exports.renovarToken = renovarToken;
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 function generarToken(usuario) {
-    console.log(usuario);
-    return jwt.sign(usuario, 'ppmManddeSecret216!!..', { expiresIn: '60m' }); //TODO: .env include secret
+    return jwt.sign(usuario, process.env.SECRET, { expiresIn: '60m' });
 }
 function validarToken(token) {
-    return jwt.verify(token, 'ppmManddeSecret216!!..', (error, usuario) => {
-        return error || usuario;
+    return jwt.verify(token, process.env.SECRET, (error, usuario) => {
+        return (error) ? false : usuario;
     });
 }
 function renovarToken(token) {
     try {
-        const usuario = jwt.verify(token, 'ppmManddeSecret216!!..'); //TODO: .env include secret
+        const usuario = jwt.verify(token, process.env.SECRET);
         delete usuario.iat;
         delete usuario.exp;
         return generarToken(usuario);

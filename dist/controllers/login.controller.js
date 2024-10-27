@@ -38,9 +38,7 @@ const usuarioModel = require('../models/usuario.model');
 function iniciarSesion(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { usuario, clave } = req.body;
-        console.log(req.body);
         let respuesta = yield usuarioModel.logueaUsuario(usuario, clave);
-        console.log("respuesta es => ", respuesta);
         if (respuesta[0].Mensaje) {
             res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         }

@@ -1,7 +1,11 @@
 import express from "express";
 const cors = require('cors');
-import loginRouter from "./routes/login";
 import * as middlewares from './middlewares/token.middleware';
+
+import loginRouter from "./routes/login";
+import usuariosRouter from "./routes/usuarios";
+import ciudadesRouter from "./routes/ciudad";
+import documentosIdentidadRouter from "./routes/documentos";
 
 const app = express();
 const session = require('express-session');
@@ -25,12 +29,14 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
 app.use("/api/", loginRouter);
+app.use("/api/", usuariosRouter);
+app.use("/api/", ciudadesRouter);
+app.use("/api/", documentosIdentidadRouter);
 
 
-
-
-app.get("/prueba", middlewares.verificarToken,(_req, res) => {
+app.get("/prueba", middlewares.verificarToken, (_req, res, next) => {
   (async () => {
     try {
       await mssql.connect(config_bd);

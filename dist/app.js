@@ -40,6 +40,7 @@ const cors = require('cors');
 const login_1 = __importDefault(require("./routes/login"));
 const middlewares = __importStar(require("./middlewares/token.middleware"));
 const app = (0, express_1.default)();
+const session = require('express-session');
 const mssql = require("mssql");
 const config_bd = require("./config/db");
 const puerto = process.env.API_PUERTO || 3000;
@@ -61,7 +62,6 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/api/", login_1.default);
 app.get("/prueba", middlewares.verificarToken, (_req, res) => {
-    console.log("Se ingresó a prueba");
     (() => __awaiter(void 0, void 0, void 0, function* () {
         try {
             yield mssql.connect(config_bd);

@@ -21,10 +21,8 @@ export function verificarToken(req: Request, res: Response, next: NextFunction){
                     .send({"mensaje":"Acceso no autorizado"});
             } else{
                 const nuevoToken = tokenService.renovarToken(arrayToken[1]);
-                res
-                    .status(200)
-                    .header({'Authorization': `Bearer ${nuevoToken}`})
-                    .send(tokenValido);
+                res.header({'Authorization': `Bearer ${nuevoToken}`});
+                next();
             }
         }
     }

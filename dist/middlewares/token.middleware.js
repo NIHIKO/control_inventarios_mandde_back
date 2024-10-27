@@ -26,24 +26,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verificarToken = verificarToken;
 const tokenService = __importStar(require("../services/token.service"));
 function verificarToken(req, res, next) {
-    var _a;
     const tokenPeticion = req.headers['authorization'];
     if (!tokenPeticion) {
-        res.status(403).send({ "mensaje": "Acceso no autorizado" });
+        res
+            .status(403)
+            .send({ "mensaje": "Acceso no autorizado" });
     }
     else {
         const arrayToken = tokenPeticion.split(' ');
         if (arrayToken[0] !== 'Bearer') {
-            //Token mal formado
-            res.status(403).send({ "mensaje": "Acceso no autorizado" });
+            res
+                .status(403)
+                .send({ "mensaje": "Acceso no autorizado" });
         }
         else {
             const tokenValido = tokenService.validarToken(arrayToken[1]);
-            if (((_a = tokenValido.name) === null || _a === void 0 ? void 0 : _a.toLowerCase()) === 'jsonwebtokenerror') {
-                res.status(401).send({ "mensaje": "Acceso no autorizado" });
+            if (!tokenValido) {
+                res
+                    .status(401)
+                    .send({ "mensaje": "Acceso no autorizado" });
             }
             else {
-                res.status(200).send(tokenValido);
+                const nuevoToken = tokenService.renovarToken(arrayToken[1]);
+                res
+                    .status(200)
+                    .header({ 'Authorization': `Bearer ${nuevoToken}` })
+                    .send(tokenValido);
             }
         }
     }

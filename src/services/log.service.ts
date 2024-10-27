@@ -1,8 +1,7 @@
 const { createLogger, format, transports } = require('winston');
 const path = require('path');
 
-// Configuración del logger
-const logger = createLogger({
+export const logger = createLogger({
   level: 'info',
   format: format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -24,4 +23,3 @@ if (process.env.NODE_ENV !== 'production') {
   }));
 }
 
-module.exports = logger;
