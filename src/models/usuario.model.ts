@@ -56,3 +56,50 @@ export async function buscarUsuarios(tipoBusqueda: string, valor: string){
         throw error;
     }
 }
+
+export async function cambiarClaveUsuario(id: number, nuevaClave: string){
+    const consulta = "EXEC UsuarioSGA1 @vOpcion = 'Actualizar Clave Usuario', "
+                    + "@vNumDocumento = '', @vNumDocumentoA = '', "
+                    + "@vNomUsuario = '', @vDirUsuario = '', "
+                    + "@vTelUsuario = '', @vCodCiudad = '', "
+                    + "@vUsuario = '', @vUsuarioA = '', "
+                    + "@vUsrProcesa = '', @vUsrCaptura = '', "
+                    + "@vUsrModifica = '', @vCodPerfil = '', "
+                    + "@vMcaActivo = '', @vCodProyecto = '', "
+                    + "@vIdUsuario = " + id + ", @vClave = '" + nuevaClave + "'";
+    try{
+        const resultado = await bdService.ejecutarConsulta(consulta);
+        return resultado.recordset;
+    } catch(error){
+        console.error('Error ejecutando el método cambiarClaveUsuario:', error);
+        throw error;
+    }
+}
+
+export async function registrarUsuario(nuevosDatos: any, id?: number){
+    const accion = (id)?'Actualizar':'Crear';
+    const consulta = "EXEC UsuarioSGA1 @vOpcion = '" + accion + "', "
+                    + "@vNumDocumento = '" + nuevosDatos.vNumDocumento + "', "
+                    + "@vNumDocumentoA = '" + nuevosDatos.vNumDocumentoA + "', "
+                    + "@vNomUsuario = '" + nuevosDatos.vNomUsuario + "', "
+                    + "@vDirUsuario = '" + nuevosDatos.vDirUsuario + "', "
+                    + "@vTelUsuario = '" + nuevosDatos.vTelUsuario + "', "
+                    + "@vCodCiudad = '" + nuevosDatos.vCodCiudad + "', "
+                    + "@vUsuario = '" + nuevosDatos.vUsuario + "', "
+                    + "@vUsuarioA = '" + nuevosDatos.vUsuarioA + "', "
+                    + "@vUsrProcesa = '" + nuevosDatos.vUsrProcesa + "', "
+                    + "@vUsrCaptura = '" + nuevosDatos.vUsrCaptura + "', "
+                    + "@vUsrModifica = '" + nuevosDatos.vUsrModifica + "', "
+                    + "@vCodPerfil = '" + nuevosDatos.vCodPerfil + "', "
+                    + "@vMcaActivo = '" + nuevosDatos.vMcaActivo + "', "
+                    + "@vCodProyecto = '" + nuevosDatos.vCodProyecto + "', "
+                    + "@vIdUsuario = '" + nuevosDatos.vIdUsuario + "', "
+                    + "@vClave = '" + nuevosDatos.vClave + "'";
+    try{
+        const resultado = await bdService.ejecutarConsulta(consulta);
+        return resultado.recordset;
+    } catch(error){
+        console.error('Error ejecutando el método cambiarClaveUsuario:', error);
+        throw error;
+    }
+}

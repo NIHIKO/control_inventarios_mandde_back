@@ -16,7 +16,7 @@ export async function listarTiposDocumento(req: Request, res: Response){
 }
 
 export async function calcularDigitoVerificacion(req: Request, res: Response){
-    const numIdentificacion = req.body.numedo_documento;
+    const numIdentificacion = req.body.numero_documento;
     if(numIdentificacion){
         if(utilerias.esNumerico(numIdentificacion)){
             let respuesta = await tiposDocumentoModel.calcularDigitoVerificacion(numIdentificacion);
