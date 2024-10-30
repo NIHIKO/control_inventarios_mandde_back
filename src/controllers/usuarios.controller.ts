@@ -61,7 +61,7 @@ export async function cambiarClaveUsuario(req: Request, res: Response){
     } else {
         res.status(200).send({
             "codigo": "1",
-            "mensaje": "lista de usuarios",
+            "mensaje": "datos del usuario",
             "data": respuesta
         });
     }
@@ -76,16 +76,12 @@ export async function editarUsuario(req: Request, res: Response){
         return;
     }
     let respuesta = await usuarioModel.registrarUsuario(datosUsuario, id);
-
-    console.log(respuesta);
-
-    if (respuesta[0]?.Mensaje) {
+    if (respuesta[0]?.Mensaje !== 'Información actualizada') {
         res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
     } else {
         res.status(200).send({
             "codigo": "1",
-            "mensaje": "lista de usuarios",
-            "data": respuesta
+            "mensaje": respuesta[0].Mensaje
         });
     }
 }

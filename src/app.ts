@@ -6,11 +6,9 @@ import loginRouter from "./routes/login";
 import usuariosRouter from "./routes/usuarios";
 import ciudadesRouter from "./routes/ciudad";
 import documentosIdentidadRouter from "./routes/documentos";
+import clientesRouter from "./routes/clientes";
 
 const app = express();
-const session = require('express-session');
-const mssql = require("mssql");
-const config_bd = require("./config/db");
 const puerto = process.env.API_PUERTO || 3000;
 const corsOptions = {
   origin: '*',
@@ -34,6 +32,7 @@ app.use("/api/", loginRouter);
 app.use("/api/", usuariosRouter);
 app.use("/api/", ciudadesRouter);
 app.use("/api/", documentosIdentidadRouter);
+app.use("/api/", clientesRouter);
 
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);
