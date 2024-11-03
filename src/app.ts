@@ -1,12 +1,12 @@
 import express from "express";
 const cors = require('cors');
-import * as middlewares from './middlewares/token.middleware';
 
 import loginRouter from "./routes/login";
 import usuariosRouter from "./routes/usuarios";
 import ciudadesRouter from "./routes/ciudad";
 import documentosIdentidadRouter from "./routes/documentos";
 import clientesRouter from "./routes/clientes";
+import ordenesRouter from "./routes/ordenes";
 
 const app = express();
 const puerto = process.env.API_PUERTO || 3000;
@@ -33,6 +33,7 @@ app.use("/api/", usuariosRouter);
 app.use("/api/", ciudadesRouter);
 app.use("/api/", documentosIdentidadRouter);
 app.use("/api/", clientesRouter);
+app.use("/api/", ordenesRouter);
 
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);

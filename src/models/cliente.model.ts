@@ -47,36 +47,10 @@ export async function buscarCliente(tipoBusqueda: string, valor: string){
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
     } catch(error){
-        console.error('Error ejecutando el método buscarUsuarios:', error);
+        console.error('Error ejecutando el método buscarCliente:', error);
         throw error;
     }
 }
-
-export async function listarClientesActivos(){
-    const consulta = "EXEC ClientesC1 "
-                    + "@vOpcion = 'Consultar_Activos',"
-                    + "@vTxtBuscar = '',"
-                    + "@vNumCliente = '',"
-                    + "@vNumClienteA = '',"
-                    + "@vDigVerificacion = '',"
-                    + "@vTipoDocumento = '',"
-                    + "@vNomCliente = '',"
-                    + "@vDirCliente = '',"
-                    + "@vTelCliente = '',"
-                    + "@vEmailCliente = '',"
-                    + "@vCodCiudad = '',"
-                    + "@vUsrModifica = '',"
-                    + "@vMcaActivo = '';";
-    try{
-        const resultado = await bdService.ejecutarConsulta(consulta);
-        return resultado.recordset;
-    } catch(error){
-        console.error('Error ejecutando el método listarClientes:', error);
-        throw error;
-    }
-}
-
-
 
 export async function registrarCliente(nuevosDatos: any, id?: number){
     const accion = (id)?'Actualizar':'Crear';
@@ -96,7 +70,7 @@ export async function registrarCliente(nuevosDatos: any, id?: number){
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
     } catch(error){
-        console.error('Error ejecutando el método cambiarClaveUsuario:', error);
+        console.error('Error ejecutando el método registrarCliente:', error);
         throw error;
     }
 }

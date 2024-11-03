@@ -99,7 +99,7 @@ export async function registrarUsuario(nuevosDatos: any, id?: number){
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
     } catch(error){
-        console.error('Error ejecutando el método cambiarClaveUsuario:', error);
+        console.error('Error ejecutando el método registrarUsuario:', error);
         throw error;
     }
 }

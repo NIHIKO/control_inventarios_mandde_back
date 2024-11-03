@@ -22,7 +22,7 @@ export async function calcularDigitoVerificacion(numDocuento: number){
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
     } catch(error){
-        console.error('Error ejecutando el método listarTiposDocumento:', error);
+        console.error('Error ejecutando el método calcularDigitoVerificacion:', error);
         throw error;
     }
 }
