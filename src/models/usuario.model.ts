@@ -93,7 +93,7 @@ export async function registrarUsuario(nuevosDatos: any, id?: number){
                     + "@vCodPerfil = '" + nuevosDatos.vCodPerfil + "', "
                     + "@vMcaActivo = '" + nuevosDatos.vMcaActivo + "', "
                     + "@vCodProyecto = '" + nuevosDatos.vCodProyecto + "', "
-                    + "@vIdUsuario = '" + nuevosDatos.vIdUsuario + "', "
+                    + "@vIdUsuario = '" + id + "', "
                     + "@vClave = '" + nuevosDatos.vClave + "'";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);

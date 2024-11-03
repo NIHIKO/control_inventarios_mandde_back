@@ -22,6 +22,6 @@ export async function iniciarSesion(req: Request, res: Response) {
         }
     } catch(ex){
         console.log("Se presentó un error: " + ex);
-        throw(ex);
+        res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
     }
 }
