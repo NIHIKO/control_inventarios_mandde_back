@@ -17,13 +17,18 @@ export async function logueaUsuario(usuario: string, clave: string) {
 
 export async function listarUsuarios(){
     const consulta = "EXEC UsuarioSGA1 @vOpcion = 'Lista Usuarios', "
-                    + "@vNumDocumento = '', @vNumDocumentoA = '', "
-                    + "@vNomUsuario = '', @vDirUsuario = '', "
-                    + "@vTelUsuario = '', @vCodCiudad = '', "
-                    + "@vUsuario = '', @vUsuarioA = '', "
-                    + "@vClave = '', @vUsrProcesa = '', "
-                    + "@vUsrCaptura = '', @vUsrModifica = '', "
-                    + "@vCodPerfil = '', @vMcaActivo = '', "
+                    + "@vNumDocumento = '', "
+                    + "@vNumDocumentoA = '', "
+                    + "@vNomUsuario = '', "
+                    + "@vDirUsuario = '', "
+                    + "@vTelUsuario = '', "
+                    + "@vCodCiudad = '', "
+                    + "@vUsuario = '', "
+                    + "@vUsuarioA = '', "
+                    + "@vClave = '', "
+                    + "@vUsrProcesa = '', "
+                    + "@vCodPerfil = '', "
+                    + "@vMcaActivo = '', "
                     + "@vCodProyecto = ''";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
