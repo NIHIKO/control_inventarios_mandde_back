@@ -44,13 +44,18 @@ export async function buscarUsuarios(tipoBusqueda: string, valor: string){
                         '@vTxtBuscar = "' + valor + '"':
                         "@vIdUsuario = " + valor;
     const consulta = "EXEC UsuarioSGA1 @vOpcion = '" + tipoBusqueda + "', "
-                    + "@vNumDocumento = '', @vNumDocumentoA = '', "
-                    + "@vNomUsuario = '', @vDirUsuario = '', "
-                    + "@vTelUsuario = '', @vCodCiudad = '', "
-                    + "@vUsuario = '', @vUsuarioA = '', "
-                    + "@vClave = '', @vUsrProcesa = '', "
-                    + "@vUsrCaptura = '', @vUsrModifica = '', "
-                    + "@vCodPerfil = '', @vMcaActivo = '', "
+                    + "@vNumDocumento = '', "
+                    + "@vNumDocumentoA = '', "
+                    + "@vNomUsuario = '', "
+                    + "@vDirUsuario = '', "
+                    + "@vTelUsuario = '', "
+                    + "@vCodCiudad = '', "
+                    + "@vUsuario = '', "
+                    + "@vUsuarioA = '', "
+                    + "@vClave = '', "
+                    + "@vUsrProcesa = '', "
+                    + "@vCodPerfil = '', "
+                    + "@vMcaActivo = '', "
                     + "@vCodProyecto = '', "
                     + busqueda;
     try{
@@ -64,13 +69,18 @@ export async function buscarUsuarios(tipoBusqueda: string, valor: string){
 
 export async function cambiarClaveUsuario(id: number, nuevaClave: string){
     const consulta = "EXEC UsuarioSGA1 @vOpcion = 'Actualizar Clave Usuario', "
-                    + "@vNumDocumento = '', @vNumDocumentoA = '', "
-                    + "@vNomUsuario = '', @vDirUsuario = '', "
-                    + "@vTelUsuario = '', @vCodCiudad = '', "
-                    + "@vUsuario = '', @vUsuarioA = '', "
-                    + "@vUsrProcesa = '', @vUsrCaptura = '', "
-                    + "@vUsrModifica = '', @vCodPerfil = '', "
-                    + "@vMcaActivo = '', @vCodProyecto = '', "
+                    + "@vNumDocumento = '', "
+                    + "@vNumDocumentoA = '', "
+                    + "@vNomUsuario = '', "
+                    + "@vDirUsuario = '', "
+                    + "@vTelUsuario = '', "
+                    + "@vCodCiudad = '', "
+                    + "@vUsuario = '', "
+                    + "@vUsuarioA = '', "
+                    + "@vUsrProcesa = '', "
+                    + "@vCodPerfil = '', "
+                    + "@vMcaActivo = '', "
+                    + "@vCodProyecto = '', "
                     + "@vIdUsuario = " + id + ", @vClave = '" + nuevaClave + "'";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
@@ -83,6 +93,7 @@ export async function cambiarClaveUsuario(id: number, nuevaClave: string){
 
 export async function registrarUsuario(nuevosDatos: any, id?: number){
     const accion = (id)?'Actualizar':'Crear';
+    const idUsuario = (id)?id:0;
     const consulta = "EXEC UsuarioSGA1 @vOpcion = '" + accion + "', "
                     + "@vNumDocumento = '" + nuevosDatos.vNumDocumento + "', "
                     + "@vNumDocumentoA = '" + nuevosDatos.vNumDocumentoA + "', "
@@ -93,12 +104,10 @@ export async function registrarUsuario(nuevosDatos: any, id?: number){
                     + "@vUsuario = '" + nuevosDatos.vUsuario + "', "
                     + "@vUsuarioA = '" + nuevosDatos.vUsuarioA + "', "
                     + "@vUsrProcesa = '" + nuevosDatos.vUsrProcesa + "', "
-                    + "@vUsrCaptura = '" + nuevosDatos.vUsrCaptura + "', "
-                    + "@vUsrModifica = '" + nuevosDatos.vUsrModifica + "', "
                     + "@vCodPerfil = '" + nuevosDatos.vCodPerfil + "', "
                     + "@vMcaActivo = '" + nuevosDatos.vMcaActivo + "', "
                     + "@vCodProyecto = '" + nuevosDatos.vCodProyecto + "', "
-                    + "@vIdUsuario = '" + id + "', "
+                    + "@vIdUsuario = '" + idUsuario + "', "
                     + "@vClave = '" + nuevosDatos.vClave + "'";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);

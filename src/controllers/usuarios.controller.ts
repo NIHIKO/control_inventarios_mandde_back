@@ -96,7 +96,7 @@ export async function editarUsuario(req: Request, res: Response){
     }
     try{
         let respuesta = await usuarioModel.registrarUsuario(datosUsuario, id);
-        if (respuesta[0]?.Mensaje !== 'Información actualizada') {
+        if (respuesta[0]?.Mensaje !== 'Información actualizada' && respuesta[0]?.Mensaje !== 'Usuario creado exitosamente') {
             res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
