@@ -1,11 +1,11 @@
 import path from 'path';
 import * as bdService from '../services/db.service';
-import { logger } from '../services/log.service';
+import * as loggerService from '../services/log.service';
 
 
 export async function buscarOrden(numOrden: number){
     const consulta = "EXECUTE OrdenesOPE1 "
-                    + "@vOpcion = 'Cosulta_IdUsuario', "
+                    + "@vOpcion = 'Consultar_Ordenes', "
                     + "@vTxtBuscar = '', "
                     + "@vNumOS = " + numOrden + ", "
                     + "@vReferencia = '', "
@@ -35,6 +35,7 @@ export async function registrarOrden(nuevosDatos: any, numOrden?: number){
         return resultado.recordset;
     } catch(error){
         console.error('Error ejecutando el método registrarOrden:', error);
+        loggerService.error(error);
         throw error;
     }
 }

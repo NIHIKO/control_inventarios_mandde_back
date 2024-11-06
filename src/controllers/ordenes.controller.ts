@@ -9,7 +9,6 @@ export async function buscarOrden(req: Request, res: Response){
     }
     try{
         let respuesta = await ordenModel.buscarOrden(numOrden);
-        console.log(respuesta);
         if (!respuesta) {
             res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
         } else {
