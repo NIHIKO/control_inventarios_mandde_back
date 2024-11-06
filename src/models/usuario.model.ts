@@ -94,7 +94,9 @@ export async function cambiarClaveUsuario(id: number, nuevaClave: string){
 export async function registrarUsuario(nuevosDatos: any, id?: number){
     const accion = (id)?'Actualizar':'Crear';
     const idUsuario = (id)?id:0;
-    const consulta = "EXEC UsuarioSGA1 @vOpcion = '" + accion + "', "
+    const consulta = "DECLARE @p1 dbo.TSGA00004; "
+                    + "INSERT INTO @p1 VALUES(" + idUsuario + ", " + nuevosDatos.vCodPerfil + "); "
+                    + "EXEC UsuarioSGA1 @vOpcion = '" + accion + "', "
                     + "@vNumDocumento = '" + nuevosDatos.vNumDocumento + "', "
                     + "@vNumDocumentoA = '" + nuevosDatos.vNumDocumentoA + "', "
                     + "@vNomUsuario = '" + nuevosDatos.vNomUsuario + "', "
@@ -108,7 +110,8 @@ export async function registrarUsuario(nuevosDatos: any, id?: number){
                     + "@vMcaActivo = '" + nuevosDatos.vMcaActivo + "', "
                     + "@vCodProyecto = '" + nuevosDatos.vCodProyecto + "', "
                     + "@vIdUsuario = '" + idUsuario + "', "
-                    + "@vClave = '" + nuevosDatos.vClave + "'";
+                    + "@vClave = '" + nuevosDatos.vClave + "', "
+                    + "@vTSGA00004=@p1";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
