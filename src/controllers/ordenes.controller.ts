@@ -24,6 +24,30 @@ export async function buscarOrden(req: Request, res: Response){
     }
 }
 
+export async function buscarOrdenFecha(req: Request, res: Response){
+    const {fechaInicio, fechaFin} = req.body;
+    if(!fechaInicio || !fechaFin){
+        res.status(400).send({ "codigo": "-1", "mensaje": 'Parametros incompletos'});
+        return;
+    }
+    try{
+        let respuesta = await ordenModel.buscarOrdenFecha(fechaInicio, fechaFin);
+        console.log("respuesta", respuesta);
+        if (!respuesta) {
+            res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
+        } else {
+            res.status(200).send({
+                "codigo": "1",
+                "mensaje": "Lista de ordenes",
+                "data": respuesta
+            });
+        }
+    } catch(ex){
+        console.log("Se ha presentado un error");
+        res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
+    }
+}
+
 export async function editarOrden(req: Request, res: Response){
     const datosOrden = req.body;
     const numOrden = req.params.numOrden;

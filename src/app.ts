@@ -8,6 +8,7 @@ import documentosIdentidadRouter from "./routes/documentos";
 import clientesRouter from "./routes/clientes";
 import ordenesRouter from "./routes/ordenes";
 import perfilesRouter from "./routes/perfiles";
+import bodegasRouter from "./routes/bodegas";
 
 const app = express();
 const puerto = process.env.API_PUERTO || 3000;
@@ -36,6 +37,7 @@ app.use("/api/", documentosIdentidadRouter);
 app.use("/api/", clientesRouter);
 app.use("/api/", ordenesRouter);
 app.use("/api/", perfilesRouter);
+app.use("/api/", bodegasRouter);
 
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);
