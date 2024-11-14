@@ -20,7 +20,7 @@ export async function listarFiltros(req: Request, res: Response){
 }
 
 export async function detallado(req: Request, res: Response){
-    const { numOrden, codBarras} = req.body;
+    const { numOrden, codBarras } = req.body;
     if(!numOrden || !codBarras){
         res.status(400).send({ "codigo": "-1", "mensaje": 'Parametros incompletos'});
         return;

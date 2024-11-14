@@ -1,8 +1,8 @@
 import * as bdService from '../services/db.service';
 
 export interface TiposDocumento{
-    "Tipo_Documento": string;
-    "Nom_Documento": string;
+    Tipo_Documento: string;
+    Nom_Documento: string;
 }
 
 export async function listarTiposDocumento(){
