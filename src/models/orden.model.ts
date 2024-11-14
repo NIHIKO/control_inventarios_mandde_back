@@ -46,7 +46,7 @@ export async function registrarOrden(nuevosDatos: any, numOrden?: number){
                     + "@vReferencia = '" + nuevosDatos.vReferencia + "', "
                     + "@vCodDato = '" + nuevosDatos.vCodDato + "', "
                     + "@vCodDato1 = '" + nuevosDatos.vCodDato1 + "', "
-                    + "@vUsuario = '" + nuevosDatos.vUsuario + "', ";
+                    + "@vUsuario = '" + nuevosDatos.vUsuario + "', "
                     + "@vNumCliente = '" + nuevosDatos.vNumCliente + "'";
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
