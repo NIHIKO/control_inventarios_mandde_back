@@ -11,6 +11,8 @@ import perfilesRouter from "./routes/perfiles";
 import bodegasRouter from "./routes/bodegas";
 import consultorRouter from "./routes/consultor";
 import inventarioRouter from "./routes/inventario";
+import informesRouter from "./routes/informes";
+import importarDatosRouter from "./routes/importar_datos";
 
 const app = express();
 const puerto = process.env.API_PUERTO || 3000;
@@ -42,6 +44,8 @@ app.use("/api/", perfilesRouter);
 app.use("/api/", bodegasRouter);
 app.use("/api/", consultorRouter);
 app.use("/api/", inventarioRouter);
+app.use("/api/", informesRouter);
+app.use("/api/", importarDatosRouter);
 
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);

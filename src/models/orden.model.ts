@@ -28,7 +28,6 @@ export async function buscarOrdenFecha(fechaInicio: string, fechaFin: string){
                     + "@vUsuario = '', "
                     + "@vFecIncial = '" + fechaInicio + "', "
                     + "@vFecFinal = '" + fechaFin + "'"
-    console.log("consulta", consulta);
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;

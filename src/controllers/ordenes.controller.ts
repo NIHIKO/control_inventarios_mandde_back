@@ -32,7 +32,6 @@ export async function buscarOrdenFecha(req: Request, res: Response){
     }
     try{
         let respuesta = await ordenModel.buscarOrdenFecha(fechaInicio, fechaFin);
-        console.log("respuesta", respuesta);
         if (!respuesta) {
             res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
         } else {
