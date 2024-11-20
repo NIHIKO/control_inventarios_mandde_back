@@ -1,5 +1,13 @@
 import * as bdService from '../services/db.service';
 
+export interface Orden{
+    vReferencia?: string;
+    vCodDato?: string;
+    vCodDato1?: string;
+    vUsuario?: string;
+    vNumCliente?: string;
+}
+
 export async function buscarOrden(numOrden: number){
     const consulta = "EXECUTE OrdenesOPE1 "
                     + "@vOpcion = 'Consultar_Ordenes', "
@@ -54,4 +62,18 @@ export async function registrarOrden(nuevosDatos: any, numOrden?: number){
         console.error('Error ejecutando el método registrarOrden:', error);
         throw error;
     }
+}
+
+export function esValida(orden: Orden){
+    if(!orden.vReferencia || orden.vReferencia == '')
+        return false;
+    if(!orden.vCodDato || orden.vCodDato == '')
+        return false;
+    if(!orden.vCodDato1 || orden.vCodDato1 == '')
+        return false;
+    if(!orden.vUsuario || orden.vUsuario == '')
+        return false;
+    if(!orden.vNumCliente || orden.vNumCliente == '')
+        return false;
+    return true;
 }

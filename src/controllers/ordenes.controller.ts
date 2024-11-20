@@ -42,7 +42,7 @@ export async function buscarOrdenFecha(req: Request, res: Response){
             });
         }
     } catch(ex){
-        console.log("Se ha presentado un error");
+        console.log("Se ha presentado un error: "), ex;
         res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
     }
 }
@@ -50,22 +50,29 @@ export async function buscarOrdenFecha(req: Request, res: Response){
 export async function editarOrden(req: Request, res: Response){
     const datosOrden = req.body;
     const numOrden = req.params.numOrden;
-    if(!datosOrden){
-        res.status(400).send({ "codigo": "-1", "mensaje": 'Parametros incompletos'});
+    if(!datosOrden || !ordenModel.esValida(datosOrden)){
+        res.status(400).send({
+            "codigo": "-1",
+            "mensaje": 'Parametros incompletos'
+        });
         return;
     }
     try{
         let respuesta = await ordenModel.registrarOrden(datosOrden, numOrden);
-        if (respuesta[0]?.Mensaje !== 'Orden creada exitosamente' && respuesta[0]?.Mensaje !== 'Información actualizada') {
+        if(!respuesta || respuesta == undefined || Object.keys(respuesta).length == 0) {
             res.status(400).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
-                "mensaje": respuesta[0].Mensaje
+                "mensaje": "Operación realizada exitosamente",
+                "data": respuesta
             });
         }
     } catch(ex){
-        console.log("Se ha presentado un error");
-        res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
+        console.log("Se ha presentado un error: ", ex);
+        res.status(500).send({
+            "codigo": "-1",
+            "mensaje": 'Se ha presentado un error, intente nuevamente'
+        });
     }
 }
