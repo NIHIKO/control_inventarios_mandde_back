@@ -51,7 +51,11 @@ export async function editarCliente(req: Request, res: Response){
     try{
         let respuesta = await clienteModel.registrarCliente(datosCliente, id);
         if(respuesta[0]?.Estado){
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0]?.Estado });
+            const codEstado = (respuesta[0]?.Estado == 'El NIT del cliente no existe')?404:400;
+            res.status(codEstado).send({
+                "codigo": "-1",
+                "mensaje": respuesta[0]?.Estado
+            });
         }
 
         else if (respuesta[0]?.Mensaje !== 'Información Insertada' && respuesta[0]?.Mensaje !== 'Información actualizada') {
