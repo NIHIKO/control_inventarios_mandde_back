@@ -1,8 +1,8 @@
 import * as bdService from '../services/db.service';
 
-export async function importar(usuario: number, numOs: number, listadoDatos: string){
+export async function importar(usuario: string, numOs: number, listadoDatos: string){
     const consulta = "DECLARE @p1 dbo.TOPE00002;"
-                    + "INSERT INTO @p1 VALUES "+ listadoDatos + "; "
+                    + listadoDatos
                     + "EXEC ImportarDatosOPE2 "
                     + "@vOpcion = '', "
                     + "@vUsrProcesa = '" + usuario + "', "
