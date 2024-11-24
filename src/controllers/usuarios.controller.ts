@@ -8,7 +8,7 @@ export async function iniciarSesion(req: Request, res: Response) {
     try{
         let respuesta = await usuarioModel.logueaUsuario(usuario, clave);
         if (respuesta[0]?.Mensaje) {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             const idUsuarioString = { id_usuario: respuesta[0].Id_Usuario };
             const token = tokenService.generarToken(idUsuarioString);
@@ -30,7 +30,7 @@ export async function listarUsuarios(req: Request, res: Response){
     try{
         let respuesta = await usuarioModel.listarUsuarios();
         if (respuesta[0]?.Mensaje) {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -50,7 +50,7 @@ export async function buscarUsuario(req: Request, res: Response){
     try{
         let respuesta = await usuarioModel.buscarUsuarios(opcionBuscar, valorBuscar);
         if (respuesta[0]?.Mensaje) {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -73,7 +73,7 @@ export async function cambiarClaveUsuario(req: Request, res: Response){
     try{
         let respuesta = await usuarioModel.cambiarClaveUsuario(id, nueva_clave);
         if (respuesta[0]?.Mensaje) {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -97,7 +97,7 @@ export async function editarUsuario(req: Request, res: Response){
     try{
         let respuesta = await usuarioModel.registrarUsuario(datosUsuario, id);
         if (respuesta[0]?.Mensaje !== 'Información actualizada' && respuesta[0]?.Mensaje !== 'Usuario creado exitosamente') {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
