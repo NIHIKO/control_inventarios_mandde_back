@@ -36,8 +36,9 @@ export async function buscarInventario(codBarras: string, numOrden: number){
                     + "@vOpcion = 'Consultar_inventario', "
                     + "@vNroDocumento = '', "
                     + "@vUsuario = '', "
-                    + "@vCodBarra = " + codBarras + ", "
+                    + "@vCodBarra = '" + codBarras + "', "
                     + "@vNumOS = " + numOrden;
+    console.log(consulta)
     try{
         const resultado = await bdService.ejecutarConsulta(consulta);
         return resultado.recordset;
