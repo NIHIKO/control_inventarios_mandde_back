@@ -9,7 +9,7 @@ export async function buscarPerfil(req: Request, res: Response){
     try{
         let respuesta = await perfilModel.buscarPerfil(opcionBuscar, proyectoId, usuarioId);
         if (respuesta[0]?.Mensaje) {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",
