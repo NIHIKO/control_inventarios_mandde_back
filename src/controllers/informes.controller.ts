@@ -5,7 +5,7 @@ export async function listarInformes(req: Request, res: Response){
     try{
         let respuesta = await informesModel.listarInformes();
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
+            res.status(403).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -28,7 +28,7 @@ export async function generarInforme(req: Request, res: Response){
     try{
         let respuesta = await informesModel.generarInforme(tipoInforme, numOrden, fechaInicio, fechaFin);
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
+            res.status(403).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
         } else {
             res.status(200).send({
                 "codigo": "1",

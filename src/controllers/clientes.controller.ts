@@ -6,7 +6,7 @@ export async function listarClientes(req: Request, res: Response){
     try{
         let respuesta = await clienteModel.listarClientes(soloActivos);
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": 'Se ha producido un error' });
+            res.status(403).send({ "codigo": "-1", "mensaje": 'Se ha producido un error' });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -26,7 +26,7 @@ export async function buscarCliente(req: Request, res: Response){
     try{
         let respuesta = await clienteModel.buscarCliente(opcionBuscar, valorBuscar);
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
+            res.status(403).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -59,7 +59,7 @@ export async function editarCliente(req: Request, res: Response){
         }
 
         else if (respuesta[0]?.Mensaje !== 'Información Insertada' && respuesta[0]?.Mensaje !== 'Información actualizada') {
-            res.status(401).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
+            res.status(403).send({ "codigo": "-1", "mensaje": respuesta[0].Mensaje });
         } else {
             res.status(200).send({
                 "codigo": "1",

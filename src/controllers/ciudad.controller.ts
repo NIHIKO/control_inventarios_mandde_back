@@ -5,7 +5,7 @@ export async function listarCiudades(req: Request, res: Response){
     try{
         let respuesta = await ciudadModel.listarCiudades();
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": 'Error obteniendo las ciudades'});
+            res.status(403).send({ "codigo": "-1", "mensaje": 'Error obteniendo las ciudades'});
         } else {
             res.status(200).send({
                 "codigo": "1",

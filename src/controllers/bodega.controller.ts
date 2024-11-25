@@ -5,7 +5,7 @@ export async function listarBodegas(req: Request, res: Response){
     try{
         let respuesta = await bodegaModel.listarBodegas();
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": 'Error obteniendo las bodegas'});
+            res.status(403).send({ "codigo": "-1", "mensaje": 'Error obteniendo las bodegas'});
         } else {
             res.status(200).send({
                 "codigo": "1",

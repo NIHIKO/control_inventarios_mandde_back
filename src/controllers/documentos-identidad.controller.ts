@@ -6,7 +6,7 @@ export async function listarTiposDocumento(req: Request, res: Response){
     try{
         let respuesta = await tiposDocumentoModel.listarTiposDocumento();
         if (!respuesta) {
-            res.status(401).send({ "codigo": "-1", "mensaje": 'Error obteniendo los tipos de documento'});
+            res.status(403).send({ "codigo": "-1", "mensaje": 'Error obteniendo los tipos de documento'});
         } else {
             res.status(200).send({
                 "codigo": "1",
@@ -27,7 +27,7 @@ export async function calcularDigitoVerificacion(req: Request, res: Response){
             try{
                 let respuesta = await tiposDocumentoModel.calcularDigitoVerificacion(numIdentificacion);
                 if (!respuesta) {
-                    res.status(401).send({ "codigo": "-1", "mensaje": 'Error obteniendo el digito de verificacion'});
+                    res.status(403).send({ "codigo": "-1", "mensaje": 'Error obteniendo el digito de verificacion'});
                 } else {
                     res.status(200).send({
                         "codigo": "1",
