@@ -67,3 +67,17 @@ export async function actualizarInventario(objInventario: Inventario){
         throw error;
     }
 }
+
+export async function inventarioProcesado(NumOS: number, CodBodegaS: string){
+    const consulta = "EXECUTE VerificaInventarioPorcesado "
+    + "@vOpcion = 'Inventario Procesado', "
+    + "@vNumOs = " + NumOS + ", "
+    + "@vCodBodegaS = '" + CodBodegaS + "'";
+    try{
+        const resultado = await bdService.ejecutarConsulta(consulta);
+        return resultado.recordset;
+    } catch(error){
+        console.error('Error ejecutando el método inventarioProcesado:', error);
+        throw error;
+    }
+}

@@ -56,3 +56,26 @@ export async function actualizarInventario(req: Request, res: Response){
         res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
     }
 }
+
+export async function inventarioProcesado(req: Request, res: Response){
+    const {CodBodegaS, NumOS} = req.body;
+    if(!CodBodegaS || !NumOS){
+        res.status(400).send({ "codigo": "-1", "mensaje": 'Parametros incompletos'});
+        return;
+    }
+    try{
+        let respuesta = await inventarioModel.inventarioProcesado(NumOS, CodBodegaS);
+        if (!respuesta) {
+            res.status(400).send({ "codigo": "-1", "mensaje": "Se ha producido un error" });
+        } else {
+            res.status(200).send({
+                "codigo": "1",
+                "mensaje": "datos de inventario",
+                "data": respuesta
+            });
+        }
+    } catch(ex){
+        console.log("Se ha presentado un error");
+        res.status(500).send({ "codigo": "-1", "mensaje": 'Se ha presentado un error, intente nuevamente'});
+    }
+}
