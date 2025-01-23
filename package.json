@@ -1,6 +1,6 @@
 {
   "name": "control_inventarios_mandde",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Backend para el aplicativo de control de inventarios de Mandde",
   "main": "app.js",
   "scripts": {
