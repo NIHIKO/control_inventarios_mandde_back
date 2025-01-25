@@ -15,7 +15,7 @@ import informesRouter from "./routes/informes";
 import importarDatosRouter from "./routes/importar-datos";
 
 const app = express();
-const puerto = process.env.API_PUERTO || 3000;
+const puerto = process.env.API_PUERTO || 5000;
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,OPTIONS,POST,PUT',
