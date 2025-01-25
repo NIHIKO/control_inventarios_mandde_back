@@ -1,7 +1,6 @@
 const config = require("../config/config.js");
 const jwt = require('jsonwebtoken');
 
-console.log(co)
 export function generarToken(usuario: object){
     return jwt.sign(usuario, config.secreto, {expiresIn: '60m'});
 }
