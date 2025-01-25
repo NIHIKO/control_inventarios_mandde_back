@@ -51,3 +51,5 @@ app.use(config.apiDir, importarDatosRouter);
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);
 });
+
+console.log(config);
