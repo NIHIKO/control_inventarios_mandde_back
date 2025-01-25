@@ -1,5 +1,6 @@
 import express from "express";
 const cors = require('cors');
+const config = require("./config/config.js");
 
 import loginRouter from "./routes/login";
 import usuariosRouter from "./routes/usuarios";
@@ -15,7 +16,7 @@ import informesRouter from "./routes/informes";
 import importarDatosRouter from "./routes/importar-datos";
 
 const app = express();
-const puerto = process.env.API_PUERTO || 5000;
+const puerto = config.puerto;
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,OPTIONS,POST,PUT',
@@ -34,18 +35,18 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.use("/api/", loginRouter);
-app.use("/api/", usuariosRouter);
-app.use("/api/", ciudadesRouter);
-app.use("/api/", documentosIdentidadRouter);
-app.use("/api/", clientesRouter);
-app.use("/api/", ordenesRouter);
-app.use("/api/", perfilesRouter);
-app.use("/api/", bodegasRouter);
-app.use("/api/", consultorRouter);
-app.use("/api/", inventarioRouter);
-app.use("/api/", informesRouter);
-app.use("/api/", importarDatosRouter);
+app.use(config.apiDir, loginRouter);
+app.use(config.apiDir, usuariosRouter);
+app.use(config.apiDir, ciudadesRouter);
+app.use(config.apiDir, documentosIdentidadRouter);
+app.use(config.apiDir, clientesRouter);
+app.use(config.apiDir, ordenesRouter);
+app.use(config.apiDir, perfilesRouter);
+app.use(config.apiDir, bodegasRouter);
+app.use(config.apiDir, consultorRouter);
+app.use(config.apiDir, inventarioRouter);
+app.use(config.apiDir, informesRouter);
+app.use(config.apiDir, importarDatosRouter);
 
 app.listen(puerto, () => {
   console.log(`Servidor iniciado el el puerto ${puerto}`);
