@@ -1,9 +1,9 @@
 module.exports = {
-    server: "190.26.219.126",
-    port: 21433,
+    server: "3.128.128.131",
+    port: 1433,
     database: "PPM",
     user: "UsrPpm",
-    password: "UsrPpmP4$$w0rd",
+    password: "UsrPpm135*",
     options: {
         encrypt: false,
         trustServerCertificate: true
